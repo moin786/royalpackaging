@@ -17,18 +17,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure git safe directory
-        run: git config --global --add safe.directory $GITHUB_WORKSPACE
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          tools: composer:v2
+          coverage: xdebug
 
-      - name: Install PHP extensions
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y php8.2-cli php8.2-mbstring php8.2-sqlite3 unzip git curl
-
-      - name: Install Node.js
-        run: |
-          curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-          sudo apt-get install -y nodejs
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
 
       - name: Install Node Dependencies
         run: npm ci
@@ -36,8 +36,8 @@ jobs:
       - name: Install Dependencies
         run: COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: NPM Install & Build
-        run: npm install && npm run build
+      - name: Build Assets
+        run: npm run build
 
       - name: Copy Environment File
         run: cp .env.example .env
@@ -73,11 +73,6 @@ jobs:
           username: ${{ secrets.DO_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            git config --global --add safe.directory /var/www/royalpackaging
-
-            curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-
             cd /var/www/royalpackaging
             git pull origin main || true
             COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -86,9 +81,5 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-
-            npm install
-            npm run build
-
-            sudo service php8.2-fpm reload
+            sudo service php8.4-fpm reload
             sudo systemctl reload nginx
