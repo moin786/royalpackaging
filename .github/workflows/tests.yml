@@ -23,7 +23,7 @@ jobs:
       - name: Install PHP extensions
         run: |
           sudo apt-get update
-          sudo apt-get install -y php8.4-cli php8.4-mbstring php8.4-sqlite3 unzip git curl
+          sudo apt-get install -y php8.3-cli php8.3-mbstring php8.3-sqlite3 unzip git curl
 
       # 3. Install Node.js & npm
       - name: Install Node.js
@@ -69,7 +69,7 @@ jobs:
 
 
             sudo apt-get update
-            sudo apt-get install -y php8.4-cli php8.4-mbstring php8.4-sqlite3 php8.4-mysql unzip git curl php8.4-fpm
+            sudo apt-get install -y php8.3-cli php8.3-mbstring php8.3-sqlite3 php8.3-mysql unzip git curl php8.3-fpm
 
             curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
             sudo apt-get install -y nodejs
@@ -82,7 +82,7 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            sudo service php8.4-fpm reload
+            sudo service php8.3-fpm reload
             sudo systemctl reload nginx
 
             npm install
