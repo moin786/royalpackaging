@@ -48,3 +48,39 @@ jobs:
 
       - name: Tests
         run: ./vendor/bin/pest
+
+  deploy:
+    needs: ci
+    if: github.ref == 'refs/heads/main' # Only deploy from main branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to DigitalOcean
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: '.'
+          target: '/var/www/royalpackaging'
+
+      - name: Run post-deploy commands (on server)
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/royalpackaging
+            git pull origin main || true
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            npm ci --production
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            sudo service php8.4-fpm reload
+            sudo systemctl reload nginx
