@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { CartItem, useCart } from '@/hooks/use-cart';
+import { CartItem } from '@/hooks/use-cart';
 import { checkout } from '@/routes';
 import { Link, usePage } from '@inertiajs/react';
 import { useMemo } from 'react';
@@ -20,7 +20,6 @@ export default function ProductDetails({
     onRemoveCartItem: (id: number) => void;
 }) {
     const { flash } = usePage().props;
-    const { removeFromCart } = useCart();
 
     const invoiceTotal = useMemo(
         () => cartItems.reduce((acc, curr) => acc + curr?.totalPrice, 0),

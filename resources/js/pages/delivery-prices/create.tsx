@@ -23,7 +23,7 @@ export default function Create({
     products: Product[];
     flash?: { success?: string; error?: string };
 }) {
-    const [data, setData] = useState();
+    const [setData] = useState();
     const { errors } = usePage().props;
 
     return (

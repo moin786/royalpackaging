@@ -24,7 +24,7 @@ export default function Create({
     categories: Category[];
     flash?: { success?: string; error?: string };
 }) {
-    const [data, setData] = useState({
+    const [setData] = useState({
         name: '',
         category_id: '',
     });

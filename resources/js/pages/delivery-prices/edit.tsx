@@ -8,7 +8,6 @@ import AppLayout from '@/layouts/app-layout';
 import DeliveryLayout from '@/layouts/delivery/layout';
 import { Field, Fieldset, Legend } from '@headlessui/react';
 import { Form, Head, usePage } from '@inertiajs/react';
-import { useState } from 'react';
 
 export default function Edit({
     delivery,
@@ -19,7 +18,6 @@ export default function Edit({
     products: Product[];
     flash?: { success?: string; error?: string };
 }) {
-    const [data, setData] = useState();
     const { errors } = usePage().props;
 
     return (

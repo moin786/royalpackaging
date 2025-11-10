@@ -25,9 +25,7 @@ export default function Index({
         addToCart,
         minusToCart,
         deliveryCharge,
-        updateQty,
         removeFromCart,
-        clearCart,
     } = useCart();
 
     function showProduct(id: number) {

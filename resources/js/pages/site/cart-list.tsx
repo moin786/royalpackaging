@@ -152,7 +152,7 @@ export default function CartList({
                 >
                     <option>Select delivery area</option>
 
-                    {product?.deliveries.map((delivery: any) => (
+                    {product?.deliveries.map((delivery: Delivery) => (
                         <option value={delivery.id} key={delivery.id}>
                             {delivery.delivery_type}
                         </option>
