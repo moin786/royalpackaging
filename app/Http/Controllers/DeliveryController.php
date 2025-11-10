@@ -11,7 +11,6 @@ class DeliveryController extends Controller
 {
    public function index()
     {
-
         $query = Delivery::query();
 
         $delivery = $query->orderBy('created_at', 'desc')->with('product')->paginate(5);
