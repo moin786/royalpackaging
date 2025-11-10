@@ -8,7 +8,6 @@ export interface Product {
     unit_price: string;
     unit_weight: number;
     product_image: string;
-    [key: string]: any;
 }
 
 export interface CartItem {

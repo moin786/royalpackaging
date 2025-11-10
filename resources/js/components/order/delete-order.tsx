@@ -21,12 +21,6 @@ export default function DeleteCategory({ order }: { order: Order }) {
             <div className="space-y-2 rounded-lg border border-red-100 bg-red-50 p-2 dark:border-red-200/10 dark:bg-red-700/10">
                 <Dialog>
                     <DialogTrigger asChild>
-                        {/* <Button
-                            variant="destructive"
-                            data-test="delete-user-button"
-                        >
-                            Delete account
-                        </Button> */}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="18"
@@ -62,7 +56,7 @@ export default function DeleteCategory({ order }: { order: Order }) {
                             resetOnSuccess
                             className="space-y-6"
                         >
-                            {({ resetAndClearErrors, processing, errors }) => (
+                            {({ resetAndClearErrors, processing }) => (
                                 <>
                                     <DialogFooter className="gap-2">
                                         <DialogClose asChild>

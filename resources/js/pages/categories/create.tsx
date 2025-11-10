@@ -41,7 +41,7 @@ export default function Create({
                             disableWhileProcessing
                             encType="multipart/form-data"
                         >
-                            {({ processing, errors }) => (
+                            {({ processing }) => (
                                 <Fieldset className="space-y-8">
                                     <Legend className="border-b p-3 text-lg font-bold">
                                         Category
