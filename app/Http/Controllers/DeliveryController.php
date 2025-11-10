@@ -31,7 +31,7 @@ class DeliveryController extends Controller
             'delivery_charge' => 'required|numeric',
             'over_weight_charge' => 'required|numeric'
         ]);
-        
+
         $data = [
             'product_id' => $request->product_id,
             'delivery_type' => $request->delivery_type,
@@ -67,7 +67,6 @@ class DeliveryController extends Controller
             'delivery_charge' => 'required|numeric',
             'over_weight_charge' => 'required|numeric'
         ]);
-
 
         $data = [
             'product_id' => $request->product_id,
