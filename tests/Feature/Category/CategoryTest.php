@@ -80,7 +80,7 @@ class CategoryTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertInertia(fn (Assert $page) =>
-            $page->component('categories/Show')
+            $page->component('categories/show')
                 ->where('id', (string) $category->id)
         );
     }
