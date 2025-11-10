@@ -20,7 +20,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.3
           tools: composer:v2
           coverage: xdebug
 
@@ -81,5 +81,5 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            sudo service php8.2-fpm reload
+            sudo service php8.3-fpm reload
             sudo systemctl reload nginx
