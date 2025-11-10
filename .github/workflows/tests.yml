@@ -12,32 +12,41 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      # 1. Configure git safe directory (if needed here)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Configure git safe directory
         run: git config --global --add safe.directory $GITHUB_WORKSPACE
 
-      # 2. Install PHP & extensions
       - name: Install PHP extensions
         run: |
           sudo apt-get update
-          sudo apt-get install -y php8.3-cli php8.3-mbstring php8.3-sqlite3 unzip git curl
+          sudo apt-get install -y php8.2-cli php8.2-mbstring php8.2-sqlite3 unzip git curl
 
-      # 3. Install Node.js & npm
       - name: Install Node.js
         run: |
           curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
           sudo apt-get install -y nodejs
 
-      # 4. Composer install
-      - name: Install Composer dependencies
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Install Dependencies
         run: COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      # 5. NPM install & build
       - name: NPM Install & Build
         run: npm install && npm run build
+
+      - name: Copy Environment File
+        run: cp .env.example .env
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
+      - name: Tests
+        run: ./vendor/bin/pest
 
   deploy:
     needs: ci
@@ -64,12 +73,7 @@ jobs:
           username: ${{ secrets.DO_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-
             git config --global --add safe.directory /var/www/royalpackaging
-
-
-            sudo apt-get update
-            sudo apt-get install -y php8.3-cli php8.3-mbstring php8.3-sqlite3 php8.3-mysql unzip git curl php8.3-fpm
 
             curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
             sudo apt-get install -y nodejs
@@ -82,8 +86,9 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            sudo service php8.3-fpm reload
-            sudo systemctl reload nginx
 
             npm install
             npm run build
+
+            sudo service php8.2-fpm reload
+            sudo systemctl reload nginx
