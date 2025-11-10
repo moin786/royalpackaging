@@ -23,11 +23,7 @@ jobs:
           php-version: 8.3
           tools: composer:v2
           coverage: xdebug
-
-      - name: Install PHP extensions
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y php8.3-cli php8.3-mbstring php8.3-sqlite3 php8.3-mysql php8.3-fpm unzip git curl
+          extensions: mbstring, sqlite3, pdo_mysql
 
       - name: Setup Node
         uses: actions/setup-node@v4
