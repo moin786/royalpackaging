@@ -17,10 +17,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PHP 8.2 for tests
+      - name: Setup PHP 8.3 for tests
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           extensions: mbstring, intl, pdo_mysql, bcmath, zip, curl, dom, fileinfo
           tools: composer:v2
 
@@ -33,14 +33,9 @@ jobs:
       - name: Install Node Dependencies
         run: npm ci
 
-      - name: Install PHP Dependencies (with fallback)
-        run: |
-          set -e
-          if ! COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader; then
-            echo "⚠️ composer.lock incompatible, regenerating for PHP 8.2..."
-            composer config platform.php 8.2.0
-            COMPOSER_ALLOW_SUPERUSER=1 composer update --no-interaction --prefer-dist --optimize-autoloader
-          fi
+      - name: Install Dependencies
+        run: COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader
+
       - name: Validate Composer Lock
         run: composer check-platform-reqs
 
@@ -74,10 +69,10 @@ jobs:
           source: '.'
           target: '/var/www/royalpackaging'
 
-      - name: Setup PHP 8.2 for deploy
+      - name: Setup PHP 8.3 for deploy
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           extensions: mbstring, intl, pdo_mysql, bcmath, zip, curl, dom, fileinfo
           tools: composer:v2
 
@@ -109,5 +104,5 @@ jobs:
             npm install
             npm run build
 
-            sudo service php8.2-fpm reload
+            sudo service php8.3-fpm reload
             sudo systemctl reload nginx
