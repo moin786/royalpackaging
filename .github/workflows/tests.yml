@@ -106,5 +106,6 @@ jobs:
             npm install
             npm run build
 
-            sudo service php8.3-fpm reload
             sudo systemctl reload nginx
+            sudo systemctl restart php8.3-fpm
+            sudo service php8.3-fpm reload
