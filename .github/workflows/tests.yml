@@ -17,12 +17,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PHP
+      - name: Setup PHP 8.2 for tests
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: '8.2'
+          extensions: mbstring, intl, pdo_mysql, bcmath, zip, curl, dom, fileinfo
           tools: composer:v2
-          coverage: xdebug
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -66,6 +66,13 @@ jobs:
           source: '.'
           target: '/var/www/royalpackaging'
 
+      - name: Setup PHP 8.2 for deploy
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl, pdo_mysql, bcmath, zip, curl, dom, fileinfo
+          tools: composer:v2
+
       - name: Run post-deploy commands (on server)
         uses: appleboy/ssh-action@v1.1.0
         with:
@@ -75,10 +82,6 @@ jobs:
           script: |
 
             git config --global --add safe.directory /var/www/royalpackaging
-
-            sudo add-apt-repository ppa:ondrej/php -y
-            sudo apt-get update
-            sudo apt-get install -y php php8.2-cli php8.2-fpm php8.2-mbstring php8.2-sqlite3 php8.2-mysql unzip git curl
 
             curl -sS https://getcomposer.org/installer | php
             sudo mv composer.phar /usr/local/bin/composer
