@@ -17,7 +17,8 @@ export default function FrontLayout({
             </div>
             <footer className="bottom-0 container mx-auto flex h-20 w-full items-center justify-center bg-gray-900">
                 <div className="mx-auto text-center text-white">
-                    Design & Developed By iHERTZ Technology
+                    Design & Developed By{' '}
+                    <a href="https://ihertztech.com">iHERTZ Technology</a>
                 </div>
             </footer>
         </>
