@@ -16,9 +16,12 @@ class SiteController extends Controller
         $categories = Category::orderBy('created_at', 'desc')->get();
         $products = Product::with('deliveries')->orderBy('created_at')->get();
         $banner = Banner::first();
-        $appSetting = ApplicationSetting::first();
+        
 
-        session()->put(['site_logo' => $appSetting->site_logo]);
+        if (ApplicationSetting::exists()) {
+            $appSetting = ApplicationSetting::first();
+            session()->put(['site_logo' => $appSetting->site_logo]);
+        }
         return Inertia::render('site/index', [
             'categories' => $categories ?? [],
             'products' => $products ?? [],
