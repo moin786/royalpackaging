@@ -21,7 +21,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, php8.3-mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
+          extensions: mbstring, php8.2-mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
           tools: composer:v2
 
       - name: Setup Node
@@ -73,7 +73,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, php8.3-mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
+          extensions: mbstring, php8.2-mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
           tools: composer:v2
 
       - name: Run post-deploy commands (on server)
@@ -90,12 +90,14 @@ jobs:
             sudo mv composer.phar /usr/local/bin/composer
 
             curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+            sudo apt-get update -y
             sudo apt-get install -y nodejs
 
             cd /var/www/royalpackaging
             git pull origin main || true
             COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader
             npm ci --production
+            cp .env.example .env
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
