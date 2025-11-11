@@ -97,11 +97,22 @@ jobs:
             git pull origin main || true
             COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader
             npm ci --production
+
+            sudo chown -R www-data:www-data storage bootstrap/cache
+
+            sudo find storage -type f -exec chmod 664
+            sudo find storage -type d -exec chmod 775
+
+            sudo find bootstrap/cache -type f -exec chmod 664
+            sudo find bootstrap/cache -type d -exec chmod 775
+            sudo chmod -R 775 storage bootstrap/cache
+
             cp .env.example .env
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
+
 
             npm install
             npm run build
