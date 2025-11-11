@@ -24,8 +24,8 @@ export default function Call() {
                 <span className="mx-7 text-sm">
                     <span className="flex w-5 flex-col items-center justify-center sm:flex-row sm:justify-between md:flex-row md:justify-between">
                         <svg
-                            width="48"
-                            height="48"
+                            width="24"
+                            height="24"
                             viewBox="0 0 448 512"
                             fill="green"
                         >
