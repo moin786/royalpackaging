@@ -71,14 +71,14 @@ export default function CustomerLogin({ children }: { children?: ReactNode }) {
                         services.
                     </DialogDescription>
 
-                    <Form
-                        {...clientLogin.form()}
-                        resetOnSuccess={['mobile']}
-                        disableWhileProcessing
-                    >
-                        {({ processing }) => (
-                            <>
-                                {!isShowRegistration ? (
+                    <>
+                        {!isShowRegistration ? (
+                            <Form
+                                {...clientLogin.form()}
+                                resetOnSuccess={['mobile']}
+                                disableWhileProcessing
+                            >
+                                {({ processing }) => (
                                     <div>
                                         <div className="mt-2 text-sm/6 text-gray-900">
                                             <Input
@@ -121,7 +121,15 @@ export default function CustomerLogin({ children }: { children?: ReactNode }) {
                                             </>
                                         </div>
                                     </div>
-                                ) : (
+                                )}
+                            </Form>
+                        ) : (
+                            <Form
+                                {...clientLogin.form()}
+                                resetOnSuccess={['mobile']}
+                                disableWhileProcessing
+                            >
+                                {({ processing }) => (
                                     <div>
                                         <div className="mt-2 text-sm/6 text-gray-900">
                                             <Input
@@ -134,17 +142,20 @@ export default function CustomerLogin({ children }: { children?: ReactNode }) {
 
                                         <div className="mt-4 flex flex-row items-center gap-5">
                                             <>
-                                                <Button
-                                                    disabled={processing}
-                                                    onClick={handleLogin}
-                                                    type="submit"
-                                                    className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
-                                                >
-                                                    <div>Send OTP</div>
-                                                </Button>
+                                                <DialogClose asChild>
+                                                    <Button
+                                                        disabled={processing}
+                                                        type="submit"
+                                                        className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                                                    >
+                                                        <div>Send OTP</div>
+                                                    </Button>
+                                                </DialogClose>
                                                 <span
                                                     className="cursor-pointer font-bold"
-                                                    onClick={handleLogin}
+                                                    onClick={() =>
+                                                        handleLogin()
+                                                    }
                                                 >
                                                     Have an OTP?
                                                 </span>
@@ -152,9 +163,9 @@ export default function CustomerLogin({ children }: { children?: ReactNode }) {
                                         </div>
                                     </div>
                                 )}
-                            </>
+                            </Form>
                         )}
-                    </Form>
+                    </>
                 </DialogContent>
             </Dialog>
         </div>
