@@ -95,7 +95,7 @@ jobs:
 
             cd /var/www/royalpackaging
             git pull origin main || true
-            COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader
+            COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader --ignore-platform-reqs
             npm ci --production
 
             sudo chown -R www-data:www-data storage bootstrap/cache
@@ -114,6 +114,7 @@ jobs:
             sudo systemctl restart php8.2-fpm
             sudo systemctl restart nginx
 
+            php artisan storage:link
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
