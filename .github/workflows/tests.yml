@@ -23,7 +23,6 @@ jobs:
           php-version: 8.2
           tools: composer:v2
           coverage: xdebug
-          extensions: mbstring, sqlite3, pdo_mysql
 
       - name: Setup Node
         uses: actions/setup-node@v4
