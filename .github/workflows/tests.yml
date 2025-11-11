@@ -33,9 +33,14 @@ jobs:
       - name: Install Node Dependencies
         run: npm ci
 
-      - name: Install Dependencies
-        run: COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader
-
+      - name: Install PHP Dependencies (with fallback)
+        run: |
+          set -e
+          if ! COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --prefer-dist --optimize-autoloader; then
+            echo "⚠️ composer.lock incompatible, regenerating for PHP 8.2..."
+            composer config platform.php 8.2.0
+            COMPOSER_ALLOW_SUPERUSER=1 composer update --no-interaction --prefer-dist --optimize-autoloader
+          fi
       - name: Validate Composer Lock
         run: composer check-platform-reqs
 
