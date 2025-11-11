@@ -11,7 +11,7 @@ export default function ProductList({
         <div className="text-center shadow-md shadow-gray-300">
             <img src={`/storage/${product.product_image}`} />
             <div
-                className="flex cursor-pointer flex-col gap-2 py-3 text-sm font-bold sm:p-5 sm:text-lg md:p-5 md:text-lg"
+                className="flex cursor-pointer flex-col gap-2 py-3 text-sm font-bold sm:p-5 sm:text-lg md:p-5 md:text-lg dark:text-gray-900"
                 onClick={() => showProduct(product.id)}
             >
                 <span>{product.name}</span>
