@@ -50,6 +50,7 @@ class HandleInertiaRequests extends Middleware
                 'order_id' => fn() => session()->get('order_id'),
                 'order_amount' => fn() => session()->get('order_amount'),
                 'order_date' => fn() => session()->get('order_date'),
+                'site_logo' => fn() => session()->get('site_logo'),
                 'error' => fn () => $request->session()->get('error'),
             ],
             'auth' => [

@@ -1,10 +1,12 @@
-import { router } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
 
 export default function SiteLogo({
     handleProduct,
 }: {
     handleProduct?: () => void;
 }) {
+    const { flash } = usePage().props;
+
     const handleClick = () => {
         if (handleProduct) {
             handleProduct();
@@ -18,10 +20,7 @@ export default function SiteLogo({
             className="w-15 cursor-pointer sm:w-20 md:w-20"
             onClick={() => handleClick()}
         >
-            <img
-                src="/storage/logo/royal_poly_logo.jpg"
-                className="max-w-full"
-            />
+            <img src={`/storage/${flash?.site_logo}`} className="max-w-full" />
         </div>
     );
 }

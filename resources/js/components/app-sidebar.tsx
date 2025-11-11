@@ -11,6 +11,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import banners from '@/routes/banners';
 import categories from '@/routes/categories';
 import deliveryPrices from '@/routes/delivery-prices';
 import orders from '@/routes/orders';
@@ -24,6 +25,12 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
+        icon: LayoutGrid,
+    },
+
+    {
+        title: 'Banners',
+        href: banners.index(),
         icon: LayoutGrid,
     },
 

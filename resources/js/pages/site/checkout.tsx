@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useCart } from '@/hooks/use-cart';
+import { Banner } from '@/interfaces/banner/banner';
 import FrontLayout from '@/layouts/front-layout';
 import TopLayout from '@/layouts/top-layout';
 import { submitOrder } from '@/routes';
@@ -12,7 +13,7 @@ import Call from './call';
 import LoginAndCart from './login-and-cart';
 import SiteLogo from './site-logo';
 
-export default function CheckOut() {
+export default function CheckOut({ banner }: { banner: Banner }) {
     const { cartItems, clearCart } = useCart();
     const { flash } = usePage().props;
     const invoiceTotal = useMemo(
@@ -27,7 +28,7 @@ export default function CheckOut() {
     }, [clearCart, flash?.success]);
 
     return (
-        <FrontLayout>
+        <FrontLayout banner={banner}>
             <>
                 <TopLayout>
                     <SiteLogo />

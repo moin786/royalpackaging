@@ -1,5 +1,6 @@
 import Pagination from '@/components/order/pagination';
 import UserOrderTable from '@/components/order/user-order-table';
+import { Banner } from '@/interfaces/banner/banner';
 import { Order } from '@/interfaces/order/order';
 import FrontLayout from '@/layouts/front-layout';
 import UserOrderLayout from '@/layouts/order/user-order-layout';
@@ -9,11 +10,17 @@ import Call from './call';
 import LoginAndCart from './login-and-cart';
 import SiteLogo from './site-logo';
 
-export default function UserOrderList({ orders }: { orders: Order[] }) {
+export default function UserOrderList({
+    orders,
+    banner,
+}: {
+    orders: Order[];
+    banner: Banner;
+}) {
     const { flash } = usePage().props;
 
     return (
-        <FrontLayout>
+        <FrontLayout banner={banner}>
             <>
                 <TopLayout>
                     <SiteLogo />

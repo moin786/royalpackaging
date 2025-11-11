@@ -1,7 +1,9 @@
-export default function SiteBanner() {
+import { Banner } from '@/interfaces/banner/banner';
+
+export default function SiteBanner({ banner }: { banner: Banner }) {
     return (
         <div className="site-banner mt-20">
-            <img src="/storage/images/site_banners/master_banner_1.png" />
+            <img src={`/storage/${banner?.banner_image}`} />
         </div>
     );
 }

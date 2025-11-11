@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationSettingController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryController;
@@ -37,6 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('delivery-prices', DeliveryController::class);
     Route::resource('application-settings', ApplicationSettingController::class);
+    Route::resource('banners', BannerController::class);
 
     Route::get('orders/pending-order', [OrderController::class, 'index'])->name('pendingorder');
     Route::get('orders/confirm-order', [OrderController::class, 'showConfirmedOrder'])->name('confirmorder');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApplicationSetting;
+use App\Models\Banner;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Services\OrderNumberGenerator;
@@ -27,8 +29,8 @@ class OrderController extends Controller
 
     public function create()
     {
-        
-        return Inertia::render('site/checkout');
+        $banner = Banner::first();
+        return Inertia::render('site/checkout', ['banner' => $banner]);
     }
 
     public function userOrderList($search) {
@@ -38,7 +40,8 @@ class OrderController extends Controller
             $query->where('status', $search);
         }
 
-        return Inertia::render('site/user-order-list', ['orders' => $query->with('items.product')->where('customer_mobile', session()->get('login_mobile'))->orderBy('created_at', 'desc')->paginate(5)]);
+        $banner = Banner::first();
+        return Inertia::render('site/user-order-list', ['orders' => $query->with('items.product')->where('customer_mobile', session()->get('login_mobile'))->orderBy('created_at', 'desc')->paginate(5), 'banner' => $banner]);
 
     }
 

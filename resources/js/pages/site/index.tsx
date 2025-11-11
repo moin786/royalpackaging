@@ -1,4 +1,5 @@
 import { CartItem, useCart } from '@/hooks/use-cart';
+import { Banner } from '@/interfaces/banner/banner';
 import { Category } from '@/interfaces/category/category';
 import { Delivery } from '@/interfaces/delivery/delivery';
 import { Product } from '@/interfaces/product/product';
@@ -16,9 +17,11 @@ import SiteLogo from './site-logo';
 export default function Index({
     categories,
     products,
+    banner,
 }: {
     categories: Category[];
     products: Product[];
+    banner: Banner;
 }) {
     const {
         cartItems,
@@ -145,7 +148,7 @@ export default function Index({
     }
 
     return (
-        <FrontLayout>
+        <FrontLayout banner={banner}>
             <>
                 <TopLayout>
                     <SiteLogo handleProduct={handleProduct} />
