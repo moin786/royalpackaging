@@ -18,7 +18,7 @@ export default function LoginAndCart({
     const { flash } = usePage().props;
 
     return (
-        <div className="flex flex-row items-center justify-between gap-10 px-12">
+        <div className="flex flex-row items-center justify-between gap-3 px-5">
             <span onClick={() => handleClick()} className="cursor-pointer">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
