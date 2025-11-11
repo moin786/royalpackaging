@@ -17,11 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PHP 8.3 for tests
+      - name: Setup PHP 8.2 for tests
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
-          extensions: mbstring, php8.3-mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
+          php-version: '8.2'
+          extensions: mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
           tools: composer:v2
 
       - name: Setup Node
@@ -69,12 +69,12 @@ jobs:
           source: '.'
           target: '/var/www/royalpackaging'
 
-      - name: Setup PHP 8.3 for deploy
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          extensions: mbstring, php8.3-mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
-          tools: composer:v2
+      #- name: Setup PHP 8.3 for deploy
+      #  uses: shivammathur/setup-php@v2
+      #  with:
+      #    php-version: '8.3'
+      #    extensions: mbstring, php8.3-mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
+      #    tools: composer:v2
 
       - name: Run post-deploy commands (on server)
         uses: appleboy/ssh-action@v1.1.0
@@ -107,7 +107,6 @@ jobs:
             sudo find bootstrap/cache -type d -exec chmod 775
             sudo chmod -R 775 storage bootstrap/cache
 
-            cp .env.example .env
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
@@ -117,6 +116,5 @@ jobs:
             npm install
             npm run build
 
-            sudo systemctl reload nginx
-            sudo systemctl restart php8.3-fpm
-            sudo service php8.3-fpm reload
+            sudo systemctl restart php8.2-fpm
+            sudo systemctl restart nginx
