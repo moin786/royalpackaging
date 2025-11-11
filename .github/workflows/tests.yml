@@ -17,12 +17,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PHP 8.3 for tests
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          extensions: mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
-          tools: composer:v2
+      #- name: Setup PHP 8.3 for tests
+      #  uses: shivammathur/setup-php@v2
+      #  with:
+      #    php-version: '8.3'
+      #    extensions: mbstring, intl, pdo_mysql, pdo_sqlite, sqlite3, bcmath, zip, curl, dom, fileinfo
+      #    tools: composer:v2
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -107,14 +107,18 @@ jobs:
             sudo find bootstrap/cache -type d -exec chmod 775
             sudo chmod -R 775 storage bootstrap/cache
 
+            sudo update-alternatives --set php /usr/bin/php8.2
+            sudo update-alternatives --set phar /usr/bin/phar8.2
+            sudo update-alternatives --set phar.phar /usr/bin/phar.phar8.2
+
+            sudo systemctl restart php8.2-fpm
+            sudo systemctl restart nginx
+
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-
+            php artisan wayfinder:generate --with-form
 
             npm install
             npm run build
-
-            sudo systemctl restart php8.2-fpm
-            sudo systemctl restart nginx
