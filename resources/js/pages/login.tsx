@@ -1,10 +1,7 @@
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
-import { usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function MyModal() {
-    const { flash } = usePage().props;
-
     let [isOpen, setIsOpen] = useState(true);
 
     function open() {
