@@ -2,7 +2,7 @@ export default function Call() {
     return (
         <div className="flex items-center">
             <span className="flex flex-col items-center gap-2 sm:flex-row sm:justify-between md:flex-row md:justify-between">
-                <span className="hidden flex-row items-center gap-3 text-sm sm:flex sm:gap-3 md:flex md:gap-3">
+                <span className="hidden flex-row items-center gap-3 text-sm sm:flex sm:gap-3 md:flex md:gap-3 dark:text-gray-900">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -24,7 +24,7 @@ export default function Call() {
                     </span>
                 </span>
                 <span className="mx-7 text-sm">
-                    <span className="flex w-5 flex-col items-center justify-center sm:flex-row sm:justify-between md:flex-row md:justify-between">
+                    <span className="flex w-5 flex-col items-center justify-center sm:flex-row sm:justify-between md:flex-row md:justify-between dark:text-gray-900">
                         <a
                             href="https://wa.me/8801979467300?call"
                             target="_blank"
