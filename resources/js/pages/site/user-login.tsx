@@ -31,7 +31,7 @@ export default function CustomerLogin({ children }: { children?: ReactNode }) {
         <div>
             <Dialog>
                 <DialogTrigger asChild>
-                    <div className="flex flex-row p-1">
+                    <div className="flex flex-row p-1 dark:text-gray-900">
                         <span>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

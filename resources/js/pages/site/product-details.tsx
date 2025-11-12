@@ -93,7 +93,7 @@ export default function ProductDetails({
                     </tbody>
                 </table>
                 {flash?.is_login ? (
-                    <div className="w-full rounded-md border border-gray-800">
+                    <div className="w-full rounded-md border border-gray-800 dark:text-white">
                         <Button className="container">
                             <Link href={checkout.url()}>Check Out</Link>
                         </Button>
@@ -102,7 +102,7 @@ export default function ProductDetails({
                     <div className="w-full rounded-md border border-gray-800">
                         <CustomerLogin>
                             <Button className="container bg-black">
-                                <span className="flex flex-row items-center gap-2">
+                                <span className="flex flex-row items-center gap-2 dark:text-white">
                                     Check Out
                                 </span>
                             </Button>
