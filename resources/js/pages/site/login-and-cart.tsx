@@ -19,7 +19,10 @@ export default function LoginAndCart({
 
     return (
         <div className="flex flex-row items-center justify-between gap-3 px-5">
-            <span onClick={() => handleClick()} className="cursor-pointer">
+            <span
+                onClick={() => handleClick()}
+                className="cursor-pointer dark:text-gray-900"
+            >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="26"
@@ -42,7 +45,7 @@ export default function LoginAndCart({
                     <div className="flex flex-row gap-5">
                         <Button>
                             <Link href={userOrderList.url('pending')}>
-                                <span>
+                                <span className="dark:text-gray-900">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -64,7 +67,7 @@ export default function LoginAndCart({
                         </Button>
                         <Form {...clientLogout.form()} disableWhileProcessing>
                             <Button>
-                                <span>
+                                <span className="dark:text-gray-900">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"

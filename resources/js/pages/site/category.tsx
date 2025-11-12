@@ -13,7 +13,7 @@ export default function CategoryList({
                 src={`/storage/${category.category_image}`}
                 className="h-20 w-20"
             />
-            <span className="text-sm font-bold sm:text-lg md:text-lg">
+            <span className="text-sm font-bold sm:text-lg md:text-lg dark:text-gray-900">
                 {category.name === 'Printed Poly' ? (
                     <span>
                         <a
