@@ -84,7 +84,7 @@ export default function CustomerLogin({ children }: { children?: ReactNode }) {
                                             <Input
                                                 name="mobile"
                                                 autoComplete="off"
-                                                className="border border-gray-700 focus:border-gray-700"
+                                                className="border border-gray-700 focus:border-gray-700 dark:text-white"
                                                 placeholder="Enter your mobile no."
                                             />
                                         </div>
@@ -93,7 +93,7 @@ export default function CustomerLogin({ children }: { children?: ReactNode }) {
                                                 name="password"
                                                 type="password"
                                                 autoComplete="off"
-                                                className="border border-gray-700 focus:border-gray-700"
+                                                className="border border-gray-700 focus:border-gray-700 dark:text-white"
                                                 placeholder="Enter your password"
                                             />
                                         </div>
