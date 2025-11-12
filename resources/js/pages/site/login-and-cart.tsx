@@ -8,17 +8,14 @@ export default function LoginAndCart({
     handleOnProductClick?: () => void;
 }) {
     const handleClick = () => {
-        if (handleOnProductClick) {
-            handleOnProductClick();
-        } else {
-            router.get('/');
-        }
+        router.get('/');
+        handleOnProductClick!();
     };
 
     const { flash } = usePage().props;
 
     return (
-        <div className="flex flex-row items-center justify-between gap-3 px-5">
+        <div className="flex flex-row items-center justify-between gap-3 px-5 dark:text-gray-900">
             <span
                 onClick={() => handleClick()}
                 className="cursor-pointer dark:text-gray-900"

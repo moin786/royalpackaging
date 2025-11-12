@@ -1,4 +1,5 @@
 import { CartItem, useCart } from '@/hooks/use-cart';
+import { useToggle } from '@/hooks/use-togle';
 import { Banner } from '@/interfaces/banner/banner';
 import { Category } from '@/interfaces/category/category';
 import { Delivery } from '@/interfaces/delivery/delivery';
@@ -6,7 +7,6 @@ import { Product } from '@/interfaces/product/product';
 import FrontLayout from '@/layouts/front-layout';
 import TopLayout from '@/layouts/top-layout';
 import { Transition } from '@headlessui/react';
-import { useEffect, useState } from 'react';
 import Call from './call';
 import CategoryList from './category';
 import LoginAndCart from './login-and-cart';
@@ -31,6 +31,9 @@ export default function Index({
         removeFromCart,
     } = useCart();
 
+    const { topen, toggleShowOnProductClick, handleProduct, handleCartItem } =
+        useToggle();
+
     function showProduct(id: number) {
         const product = products?.find(
             (prod: Product) => prod.id === id,
@@ -52,13 +55,13 @@ export default function Index({
 
         toggleShowOnProductClick();
     }
-    function handleProduct() {
-        toggleShow();
-    }
+    // function handleProduct() {
+    //     toggleShow();
+    // }
 
-    function handleCartItem() {
-        toggleShowOnProductClick();
-    }
+    // function handleCartItem() {
+    //     toggleShowOnProductClick();
+    // }
 
     const handleQtyPlus = (item: CartItem) => {
         const findProduct = {
@@ -110,41 +113,6 @@ export default function Index({
 
     function handleRemoveFromCart(productid: number) {
         removeFromCart(productid);
-    }
-
-    // 1️⃣ Initialize from localStorage
-    const [isShow, setIsShow] = useState<boolean>(() => {
-        if (typeof window === 'undefined') return false; // SSR safety
-        const stored = localStorage.getItem('isShow');
-        return stored ? JSON.parse(stored) : false;
-    });
-
-    // 2️⃣ Persist to localStorage whenever state changes
-    useEffect(() => {
-        localStorage.setItem('isShow', JSON.stringify(isShow));
-    }, [isShow]);
-
-    // 1️⃣ Initialize from localStorage
-    const [topen, setTopen] = useState<boolean>(() => {
-        if (typeof window === 'undefined') return true; // SSR safety
-        const stored = localStorage.getItem('topen');
-        return stored ? JSON.parse(stored) : false;
-    });
-
-    // 2️⃣ Persist to localStorage whenever state changes
-    useEffect(() => {
-        localStorage.setItem('topen', JSON.stringify(topen));
-    }, [topen]);
-
-    // 3️⃣ Toggle visibility
-    function toggleShow() {
-        setIsShow((prev) => !prev);
-        setTopen(false);
-    }
-
-    function toggleShowOnProductClick() {
-        setIsShow((prev) => !prev);
-        setTopen(true);
     }
 
     return (

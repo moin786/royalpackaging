@@ -8,11 +8,8 @@ export default function SiteLogo({
     const { flash } = usePage().props;
 
     const handleClick = () => {
-        if (handleProduct) {
-            handleProduct();
-        } else {
-            router.get('/');
-        }
+        handleProduct!();
+        router.get('/');
     };
 
     return (

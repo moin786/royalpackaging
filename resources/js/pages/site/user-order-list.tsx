@@ -1,5 +1,6 @@
 import Pagination from '@/components/order/pagination';
 import UserOrderTable from '@/components/order/user-order-table';
+import { useToggle } from '@/hooks/use-togle';
 import { Banner } from '@/interfaces/banner/banner';
 import { Order } from '@/interfaces/order/order';
 import FrontLayout from '@/layouts/front-layout';
@@ -18,15 +19,16 @@ export default function UserOrderList({
     banner: Banner;
 }) {
     const { flash } = usePage().props;
+    const { handleProduct, handleCartItem } = useToggle();
 
     return (
         <FrontLayout banner={banner}>
             <>
                 <TopLayout>
-                    <SiteLogo />
+                    <SiteLogo handleProduct={handleProduct} />
                     <Call />
 
-                    <LoginAndCart />
+                    <LoginAndCart handleOnProductClick={handleCartItem} />
                 </TopLayout>
 
                 <UserOrderLayout>
