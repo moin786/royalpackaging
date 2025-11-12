@@ -137,7 +137,7 @@ export default function Index({
                         </div>
                     )}
                     <div className="mt-5 w-full">
-                        <div className="my-10 border-b border-b-gray-300 pb-3 text-center text-lg font-bold">
+                        <div className="my-10 border-b border-b-gray-300 pb-3 text-center text-lg font-bold dark:text-gray-900">
                             Non Printed Poly
                         </div>
 

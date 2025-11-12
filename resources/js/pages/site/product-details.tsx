@@ -28,7 +28,7 @@ export default function ProductDetails({
     return (
         <>
             <div className="flex flex-col justify-between gap-5 overflow-x-auto">
-                <table className="item-table w-full table-auto border-collapse border border-gray-400">
+                <table className="item-table w-full table-auto border-collapse border border-gray-400 dark:text-gray-900">
                     <thead>
                         <tr>
                             <th className="border border-gray-300">
